@@ -29,6 +29,6 @@ function operate(operatorName, firstNumber, secondNumber) {
       return divide(firstNumber, secondNumber);
       break;
     default:
-      console.log("Oopsi!");
+      console.log("Oops!");
   }
 }

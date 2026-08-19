@@ -1,3 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100dvh;
+  width: 100dvw;
+  background-color: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 main {
-  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  margin-top: 25%;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.output {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background-color: #333;
+  color: red;
+  font-size: 2rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+button {
+  width: 60px;
+  aspect-ratio: 1 / 1;
+  font-size: 1.5rem;
+  border-width: 8px;
+  border-radius: 12px;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.numbers button {
+  background-color: #fff;
+  color: #cc1f1f;
+  font-weight: bold;
+  border-color: #eee;
+}
+
+.operators {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.operators button {
+  background-color: #666;
+  color: hwb(0 8% 52%);
+  font-size: 2rem;
+}
+
+#reset {
+  background-color: #cc1f1f;
+  color: #fff;
+  border-color: #b71b1b;
+  font-size: 2rem;
 }
