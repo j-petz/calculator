@@ -1,8 +1,24 @@
+let currentNumber = 0;
+
+function setOutput() {
+  let output = document.querySelector(".output");
+  output.textContent = currentNumber;
+}
+
+//setOutput();
+let numbersArray = [];
+
 function getNumbers() {
   const numberButtons = document.querySelectorAll(".numbers button");
   numberButtons.forEach((btn) =>
     btn.addEventListener("click", function (e) {
-      console.log(e.target.textContent);
+      let selectedNumber = e.target.textContent;
+      console.log(selectedNumber);
+      numbersArray.push(selectedNumber);
+      console.log(numbersArray);
+      currentNumber = numbersArray.join("");
+      console.log(currentNumber);
+      setOutput();
     }),
   );
 }
