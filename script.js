@@ -1,3 +1,14 @@
+function getNumbers() {
+  const numberButtons = document.querySelectorAll(".numbers button");
+  numberButtons.forEach((btn) =>
+    btn.addEventListener("click", function (e) {
+      console.log(e.target.textContent);
+    }),
+  );
+}
+
+getNumbers();
+
 function add(a, b) {
   return a + b;
 }

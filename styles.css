@@ -10,6 +10,7 @@ body {
   width: 100dvw;
   background-color: #eee;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
 main {
@@ -19,8 +20,24 @@ main {
   background-color: #fff;
   padding: 16px;
   border-radius: 16px;
-  margin-top: 25%;
+  margin-top: 25dvh;
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.gap-8 {
+  gap: 8px;
 }
 
 .output {
@@ -36,7 +53,7 @@ main {
 
 .buttons {
   display: flex;
-  gap: 16px;
+  gap: 8px;
 }
 
 button {
@@ -50,7 +67,7 @@ button {
 .numbers {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .numbers button {
@@ -60,21 +77,25 @@ button {
   border-color: #eee;
 }
 
-.operators {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.operators button {
+[class^="operators"] button {
   background-color: #666;
   color: hwb(0 8% 52%);
   font-size: 2rem;
 }
 
-#reset {
+#clear {
+  font-size: 1.5rem;
+}
+
+#enter {
   background-color: #cc1f1f;
   color: #fff;
   border-color: #b71b1b;
   font-size: 2rem;
+  flex-grow: 1;
+}
+
+#zero {
+  aspect-ratio: unset;
+  flex-grow: 1;
 }
