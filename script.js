@@ -64,6 +64,19 @@ function calculate() {
 }
 calculate();
 
+function clear() {
+  let clear = document.querySelector("#clear");
+  clear.addEventListener("click", function (e) {
+    currentNumber = 0;
+    numbersArray = [];
+    currentOperator = "";
+    firstNumber = "";
+    secondNumber = "";
+    setOutput();
+  });
+}
+clear();
+
 function add(a, b) {
   currentNumber = parseInt(a) + parseInt(b);
   console.log(`Current Number: ${currentNumber}`);
