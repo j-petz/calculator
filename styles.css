@@ -1,3 +1,8 @@
+@font-face {
+  font-family: digital-7;
+  src: url(digital-7.ttf);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -40,15 +45,21 @@ main {
   gap: 8px;
 }
 
-.output {
+.display {
   display: flex;
   align-items: center;
-  height: 60px;
+  justify-content: flex-end;
+  min-height: 60px;
   background-color: #333;
-  color: red;
-  font-size: 2rem;
   padding: 8px 16px;
   border-radius: 4px;
+}
+
+.output {
+  color: red;
+  font-family: digital-7;
+  font-size: 3rem;
+  text-align: right;
 }
 
 .buttons {
