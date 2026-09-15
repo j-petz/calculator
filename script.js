@@ -1,6 +1,7 @@
 let currentNumber = 0;
+let prevOperator = "";
 let currentOperator = "";
-let firstNumber = "";
+let firstNumber = 0;
 let secondNumber = "";
 let result = "";
 
@@ -16,11 +17,8 @@ function getNumbers() {
   numberButtons.forEach((btn) =>
     btn.addEventListener("click", function (e) {
       let selectedNumber = e.target.textContent;
-      //console.log(selectedNumber);
       numbersArray.push(selectedNumber);
-      //console.log(numbersArray);
       currentNumber = numbersArray.join("");
-      //console.log(currentNumber);
       setOutput(currentNumber);
     }),
   );
@@ -33,18 +31,29 @@ function getOperator() {
   );
   operatorButtons.forEach((btn) =>
     btn.addEventListener("click", function (e) {
-      currentOperator = e.target.id;
-      if (!firstNumber) {
-        firstNumber = currentNumber;
-        numbersArray = [];
-        setOutput(currentNumber);
-        /* console.log(`Current Operator: ${currentOperator}`);
-        console.log(`First Number: ${firstNumber}`);
-        console.log(`Current Number: ${currentNumber}`); */
+      if (currentOperator) {
+        prevOperator = currentOperator;
+        currentOperator = e.target.id;
+        if (!firstNumber) {
+          firstNumber = currentNumber;
+          numbersArray = [];
+        } else {
+          secondNumber = currentNumber;
+          numbersArray = [];
+          operate(prevOperator, firstNumber, secondNumber);
+          firstNumber = result;
+        }
       } else {
-        secondNumber = currentNumber;
-        numbersArray = [];
-        // console.log(`Second Number: ${secondNumber}`);
+        currentOperator = e.target.id;
+        if (!firstNumber) {
+          firstNumber = currentNumber;
+          numbersArray = [];
+        } else {
+          secondNumber = currentNumber;
+          numbersArray = [];
+          operate(currentOperator, firstNumber, secondNumber);
+          firstNumber = result;
+        }
       }
     }),
   );
@@ -52,15 +61,12 @@ function getOperator() {
 getOperator();
 
 function calculate() {
-  let enter = document.querySelector("#enter");
+  let enter = document.querySelector("#calculate");
   enter.addEventListener("click", function (e) {
-    secondNumber = currentNumber; /* 
-    console.log(`Current Operator: ${currentOperator}`);
-    console.log(`First Number: ${firstNumber}`);
-    console.log(`Second Number: ${secondNumber}`);
-    console.log(`Current Number: ${currentNumber}`); */
+    secondNumber = currentNumber;
     operate(currentOperator, firstNumber, secondNumber);
-    firstNumber = currentNumber;
+    //firstNumber = result;
+    numbersArray = [];
   });
 }
 calculate();
@@ -71,7 +77,8 @@ function clear() {
     currentNumber = 0;
     numbersArray = [];
     currentOperator = "";
-    firstNumber = "";
+    prevOperator = "";
+    firstNumber = 0;
     secondNumber = "";
     setOutput(currentNumber);
   });
@@ -79,7 +86,7 @@ function clear() {
 clear();
 
 function add(a, b) {
-  result = parseInt(a) + parseInt(b);
+  result = parseFloat(a) + parseFloat(b);
   /* console.log(`Current Number: ${currentNumber}`);
   console.log(`First Number: ${firstNumber}`);
   console.log(`Second Number: ${secondNumber}`); */
@@ -88,19 +95,19 @@ function add(a, b) {
 }
 
 function subtract(a, b) {
-  result = parseInt(a) - parseInt(b);
+  result = parseFloat(a) - parseFloat(b);
   setOutput(result);
   //return a - b;
 }
 
 function multiply(a, b) {
-  result = parseInt(a) * parseInt(b);
+  result = parseFloat(a) * parseFloat(b);
   setOutput(result);
   //return a * b;
 }
 
 function divide(a, b) {
-  result = parseInt(a) / parseInt(b);
+  result = parseFloat(a) / parseFloat(b);
   setOutput(result);
   //return a / b;
 }
