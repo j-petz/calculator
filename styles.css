@@ -22,7 +22,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background-color: #fff;
+  background-color: #fefefe;
   padding: 16px;
   border-radius: 16px;
   margin-top: 25dvh;
@@ -82,7 +82,7 @@ button {
 }
 
 .numbers button {
-  background-color: #fff;
+  background-color: #fefefe;
   color: #cc1f1f;
   font-weight: bold;
   border-color: #eee;

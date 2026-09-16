@@ -1,7 +1,7 @@
 let currentNumber = 0;
 let prevOperator = "";
 let currentOperator = "";
-let firstNumber = 0;
+let firstNumber = "";
 let secondNumber = "";
 let result = "";
 
@@ -65,7 +65,7 @@ function calculate() {
   enter.addEventListener("click", function (e) {
     secondNumber = currentNumber;
     operate(currentOperator, firstNumber, secondNumber);
-    //firstNumber = result;
+    firstNumber = "";
     numbersArray = [];
   });
 }
@@ -87,29 +87,22 @@ clear();
 
 function add(a, b) {
   result = parseFloat(a) + parseFloat(b);
-  /* console.log(`Current Number: ${currentNumber}`);
-  console.log(`First Number: ${firstNumber}`);
-  console.log(`Second Number: ${secondNumber}`); */
   setOutput(result);
-  //return a + b;
 }
 
 function subtract(a, b) {
   result = parseFloat(a) - parseFloat(b);
   setOutput(result);
-  //return a - b;
 }
 
 function multiply(a, b) {
   result = parseFloat(a) * parseFloat(b);
   setOutput(result);
-  //return a * b;
 }
 
 function divide(a, b) {
   result = parseFloat(a) / parseFloat(b);
   setOutput(result);
-  //return a / b;
 }
 
 function operate(operatorName, firstNumber, secondNumber) {
