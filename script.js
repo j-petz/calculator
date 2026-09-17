@@ -5,9 +5,9 @@ let firstNumber = "";
 let secondNumber = "";
 let result = "";
 
-function setOutput(test) {
+function setOutput(value) {
   let output = document.querySelector(".output");
-  output.textContent = test;
+  output.textContent = value;
 }
 
 let numbersArray = [];
@@ -37,6 +37,8 @@ function getOperator() {
         if (!firstNumber) {
           firstNumber = currentNumber;
           numbersArray = [];
+        } else if (numbersArray.length === 0) {
+          return;
         } else {
           secondNumber = currentNumber;
           numbersArray = [];
@@ -65,7 +67,7 @@ function calculate() {
   enter.addEventListener("click", function (e) {
     secondNumber = currentNumber;
     operate(currentOperator, firstNumber, secondNumber);
-    firstNumber = "";
+    firstNumber = result;
     numbersArray = [];
   });
 }
