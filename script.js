@@ -4,6 +4,7 @@ let currentOperator = "";
 let firstNumber = "";
 let secondNumber = "";
 let result = "";
+let prevResult = "";
 
 function setOutput(value) {
   let output = document.querySelector(".output");
@@ -39,11 +40,15 @@ function getOperator() {
           numbersArray = [];
         } else if (numbersArray.length === 0) {
           return;
+        } else if (firstNumber === result) {
+          firstNumber = currentNumber;
+          numbersArray = [];
         } else {
           secondNumber = currentNumber;
           numbersArray = [];
           operate(prevOperator, firstNumber, secondNumber);
           firstNumber = result;
+          result = "";
         }
       } else {
         currentOperator = e.target.id;
@@ -63,12 +68,12 @@ function getOperator() {
 getOperator();
 
 function calculate() {
-  let enter = document.querySelector("#calculate");
-  enter.addEventListener("click", function (e) {
+  let calculate = document.querySelector("#calculate");
+  calculate.addEventListener("click", function (e) {
     secondNumber = currentNumber;
+    numbersArray = [];
     operate(currentOperator, firstNumber, secondNumber);
     firstNumber = result;
-    numbersArray = [];
   });
 }
 calculate();
@@ -80,8 +85,9 @@ function clear() {
     numbersArray = [];
     currentOperator = "";
     prevOperator = "";
-    firstNumber = 0;
+    firstNumber = "";
     secondNumber = "";
+    result = "";
     setOutput(currentNumber);
   });
 }
