@@ -4,7 +4,7 @@ let currentOperator = "";
 let firstNumber = "";
 let secondNumber = "";
 let result = "";
-let prevResult = "";
+let enterPressed = false;
 
 function setOutput(value) {
   let output = document.querySelector(".output");
@@ -39,16 +39,17 @@ function getOperator() {
           firstNumber = currentNumber;
           numbersArray = [];
         } else if (numbersArray.length === 0) {
-          return;
-        } else if (firstNumber === result) {
+          enterPressed = false; // Reset state if operator is pressed again
+        } else if (enterPressed) {
           firstNumber = currentNumber;
           numbersArray = [];
+          enterPressed = false;
         } else {
           secondNumber = currentNumber;
           numbersArray = [];
           operate(prevOperator, firstNumber, secondNumber);
           firstNumber = result;
-          result = "";
+          enterPressed = false;
         }
       } else {
         currentOperator = e.target.id;
@@ -60,6 +61,7 @@ function getOperator() {
           numbersArray = [];
           operate(currentOperator, firstNumber, secondNumber);
           firstNumber = result;
+          enterPressed = false;
         }
       }
     }),
@@ -74,6 +76,7 @@ function calculate() {
     numbersArray = [];
     operate(currentOperator, firstNumber, secondNumber);
     firstNumber = result;
+    enterPressed = true;
   });
 }
 calculate();
@@ -89,6 +92,7 @@ function clear() {
     secondNumber = "";
     result = "";
     setOutput(currentNumber);
+    enterPressed = false;
   });
 }
 clear();
