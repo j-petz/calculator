@@ -18,13 +18,25 @@ function getNumbers() {
   numberButtons.forEach((btn) =>
     btn.addEventListener("click", function (e) {
       let selectedNumber = e.target.textContent;
-      numbersArray.push(selectedNumber);
-      currentNumber = numbersArray.join("");
-      setOutput(currentNumber);
+      if (numbersArray.length === 0 && selectedNumber === ".") {
+        numbersArray.push(0);
+        numbersArray.push(selectedNumber);
+        currentNumber = numbersArray.join("");
+        setOutput(currentNumber);
+      } else {
+        numbersArray.push(selectedNumber);
+        currentNumber = numbersArray.join("");
+        setOutput(currentNumber);
+      }
     }),
   );
 }
 getNumbers();
+
+const dotButton = document.querySelector("#dot");
+dotButton.addEventListener("click", function (e) {
+  dotButton.disabled = true;
+});
 
 function getOperator() {
   const operatorButtons = document.querySelectorAll(
@@ -32,6 +44,7 @@ function getOperator() {
   );
   operatorButtons.forEach((btn) =>
     btn.addEventListener("click", function (e) {
+      dotButton.disabled = false;
       if (currentOperator) {
         prevOperator = currentOperator;
         currentOperator = e.target.id;
@@ -77,6 +90,7 @@ function calculate() {
     operate(currentOperator, firstNumber, secondNumber);
     firstNumber = result;
     enterPressed = true;
+    dotButton.disabled = false;
   });
 }
 calculate();
@@ -93,6 +107,7 @@ function clear() {
     result = "";
     setOutput(currentNumber);
     enterPressed = false;
+    dotButton.disabled = false;
   });
 }
 clear();
