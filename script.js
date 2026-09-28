@@ -112,23 +112,48 @@ function clear() {
 }
 clear();
 
+function roundFloat(value) {
+  rounded = value.toFixed(8);
+  let roundedAsArray = Array.from(rounded);
+  let lastElement = roundedAsArray[roundedAsArray.length - 1];
+  while (lastElement === "0" || lastElement === ".") {
+    roundedAsArray.pop();
+    lastElement = roundedAsArray[roundedAsArray.length - 1];
+  }
+  rounded = roundedAsArray.join("");
+  if (!rounded) rounded = 0;
+  return rounded;
+}
+
 function add(a, b) {
   result = parseFloat(a) + parseFloat(b);
+  if (result % 1 !== 0) {
+    result = roundFloat(result);
+  }
   setOutput(result);
 }
 
 function subtract(a, b) {
   result = parseFloat(a) - parseFloat(b);
+  if (result % 1 !== 0) {
+    result = roundFloat(result);
+  }
   setOutput(result);
 }
 
 function multiply(a, b) {
   result = parseFloat(a) * parseFloat(b);
+  if (result % 1 !== 0) {
+    result = roundFloat(result);
+  }
   setOutput(result);
 }
 
 function divide(a, b) {
   result = parseFloat(a) / parseFloat(b);
+  if (result % 1 !== 0) {
+    result = roundFloat(result);
+  }
   setOutput(result);
 }
 
@@ -146,7 +171,5 @@ function operate(operatorName, firstNumber, secondNumber) {
     case "divide":
       return divide(firstNumber, secondNumber);
       break;
-    /* default:
-      console.log("Oops!"); */
   }
 }
