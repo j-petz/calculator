@@ -88,6 +88,11 @@ button {
   border-color: #eee;
 }
 
+.numbers button:disabled {
+  background-color: #ddd;
+  opacity: 0.8;
+}
+
 [class^="operators"] button {
   background-color: #666;
   color: hwb(0 8% 52%);

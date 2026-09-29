@@ -33,6 +33,20 @@ function getNumbers() {
 }
 getNumbers();
 
+const backspace = document.querySelector("#backspace");
+backspace.addEventListener("click", function () {
+  console.log("<-");
+  if (numbersArray.length > 1) {
+    numbersArray.pop();
+    currentNumber = numbersArray.join("");
+    setOutput(currentNumber);
+  } else if (numbersArray.length === 1) {
+    numbersArray = [];
+    currentNumber = 0;
+    setOutput(currentNumber);
+  }
+});
+
 const dotButton = document.querySelector("#dot");
 dotButton.addEventListener("click", function (e) {
   dotButton.disabled = true;
