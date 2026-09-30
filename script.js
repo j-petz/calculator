@@ -35,7 +35,6 @@ getNumbers();
 
 const backspace = document.querySelector("#backspace");
 backspace.addEventListener("click", function () {
-  console.log("<-");
   if (numbersArray.length > 1) {
     numbersArray.pop();
     currentNumber = numbersArray.join("");

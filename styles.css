@@ -13,7 +13,7 @@ body {
   align-items: flex-start;
   height: 100dvh;
   width: 100dvw;
-  background-color: #eee;
+  background-color: #ebebeb;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 }
@@ -22,11 +22,13 @@ main {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background-color: #fefefe;
+  background-color: #fafafa;
   padding: 16px;
   border-radius: 16px;
   margin-top: 25dvh;
-  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 0 8px 4px rgba(0, 0, 0, 0.2),
+    -2px -2px 0px #fff;
 }
 
 .d-flex {
@@ -49,7 +51,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  min-height: 60px;
+  height: 60px;
+  width: 252px;
+  overflow: hidden;
   background-color: #333;
   padding: 8px 16px;
   border-radius: 4px;
@@ -82,7 +86,7 @@ button {
 }
 
 .numbers button {
-  background-color: #fefefe;
+  background-color: #fafafa;
   color: #cc1f1f;
   font-weight: bold;
   border-color: #eee;
