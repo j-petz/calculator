@@ -18,11 +18,37 @@ window.addEventListener("keydown", function (e) {
   if (!isNaN(selectedKey)) {
     getNumbers(selectedKey);
     console.log(`It's a number!`);
-  } else if (selectedKey === "Backspace") {
-    backspace();
-  } else if (selectedKey === ".") {
-    getNumbers(selectedKey);
-    dotButton.disabled = true;
+  }
+  switch (selectedKey) {
+    case "+":
+      selectedKey = "add";
+      getOperator(selectedKey);
+      break;
+    case "-":
+      selectedKey = "subtract";
+      getOperator(selectedKey);
+      break;
+    case "*":
+      selectedKey = "multiply";
+      getOperator(selectedKey);
+      break;
+    case "/":
+      selectedKey = "divide";
+      getOperator(selectedKey);
+      break;
+    case ".":
+      getNumbers(selectedKey);
+      dotButton.disabled = true;
+      break;
+    case "Backspace":
+      backspace();
+      break;
+    case "Enter":
+      calculate();
+      break;
+    case "Escape":
+      clear();
+      break;
   }
   console.log(selectedKey, typeof selectedKey);
 });
@@ -70,79 +96,83 @@ dotButton.addEventListener("click", function (e) {
   dotButton.disabled = true;
 });
 
-function getOperator() {
-  const operatorButtons = document.querySelectorAll(
-    "#add, #subtract, #multiply, #divide",
-  );
-  operatorButtons.forEach((btn) =>
-    btn.addEventListener("click", function (e) {
-      dotButton.disabled = false;
-      if (currentOperator) {
-        prevOperator = currentOperator;
-        currentOperator = e.target.id;
-        if (!firstNumber) {
-          firstNumber = currentNumber;
-          numbersArray = [];
-        } else if (numbersArray.length === 0) {
-          enterPressed = false; // Reset state if operator is pressed again
-        } else if (enterPressed) {
-          firstNumber = currentNumber;
-          numbersArray = [];
-          enterPressed = false;
-        } else {
-          secondNumber = currentNumber;
-          numbersArray = [];
-          operate(prevOperator, firstNumber, secondNumber);
-          firstNumber = result;
-          enterPressed = false;
-        }
-      } else {
-        currentOperator = e.target.id;
-        if (!firstNumber) {
-          firstNumber = currentNumber;
-          numbersArray = [];
-        } else {
-          secondNumber = currentNumber;
-          numbersArray = [];
-          operate(currentOperator, firstNumber, secondNumber);
-          firstNumber = result;
-          enterPressed = false;
-        }
-      }
-    }),
-  );
+const operatorButtons = document.querySelectorAll(
+  "#add, #subtract, #multiply, #divide",
+);
+operatorButtons.forEach((btn) =>
+  btn.addEventListener("click", function (e) {
+    let selectedOperator = e.target.id;
+    getOperator(selectedOperator);
+  }),
+);
+
+function getOperator(input) {
+  dotButton.disabled = false;
+  if (currentOperator) {
+    prevOperator = currentOperator;
+    currentOperator = input;
+    if (!firstNumber) {
+      firstNumber = currentNumber;
+      numbersArray = [];
+    } else if (numbersArray.length === 0) {
+      enterPressed = false; // Reset state if operator is pressed again
+    } else if (enterPressed) {
+      firstNumber = currentNumber;
+      numbersArray = [];
+      enterPressed = false;
+    } else {
+      secondNumber = currentNumber;
+      numbersArray = [];
+      operate(prevOperator, firstNumber, secondNumber);
+      firstNumber = result;
+      enterPressed = false;
+    }
+  } else {
+    currentOperator = input;
+    if (!firstNumber) {
+      firstNumber = currentNumber;
+      numbersArray = [];
+    } else {
+      secondNumber = currentNumber;
+      numbersArray = [];
+      operate(currentOperator, firstNumber, secondNumber);
+      firstNumber = result;
+      enterPressed = false;
+    }
+  }
 }
-getOperator();
+
+let calculateButton = document.querySelector("#calculate");
+calculateButton.addEventListener("click", function (e) {
+  calculate();
+});
 
 function calculate() {
-  let calculate = document.querySelector("#calculate");
-  calculate.addEventListener("click", function (e) {
-    secondNumber = currentNumber;
-    numbersArray = [];
-    operate(currentOperator, firstNumber, secondNumber);
-    firstNumber = result;
-    enterPressed = true;
-    dotButton.disabled = false;
-  });
+  secondNumber = currentNumber;
+  numbersArray = [];
+  operate(currentOperator, firstNumber, secondNumber);
+  firstNumber = result;
+  enterPressed = true;
+  dotButton.disabled = false;
 }
-calculate();
+
+let clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", function (e) {
+  clear();
+});
 
 function clear() {
-  let clear = document.querySelector("#clear");
-  clear.addEventListener("click", function (e) {
-    currentNumber = 0;
-    numbersArray = [];
-    currentOperator = "";
-    prevOperator = "";
-    firstNumber = "";
-    secondNumber = "";
-    result = "";
-    setOutput(currentNumber);
-    enterPressed = false;
-    dotButton.disabled = false;
-  });
+  currentNumber = 0;
+  numbersArray = [];
+  currentOperator = "";
+  prevOperator = "";
+  firstNumber = "";
+  secondNumber = "";
+  result = "";
+  setOutput(currentNumber);
+  enterPressed = false;
+  dotButton.disabled = false;
 }
-clear();
 
 function roundFloat(value) {
   rounded = value.toFixed(8);
