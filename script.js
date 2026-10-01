@@ -13,28 +13,47 @@ function setOutput(value) {
 
 let numbersArray = [];
 
-function getNumbers() {
-  const numberButtons = document.querySelectorAll(".numbers button");
-  numberButtons.forEach((btn) =>
-    btn.addEventListener("click", function (e) {
-      let selectedNumber = e.target.textContent;
-      if (numbersArray.length === 0 && selectedNumber === ".") {
-        numbersArray.push(0);
-        numbersArray.push(selectedNumber);
-        currentNumber = numbersArray.join("");
-        setOutput(currentNumber);
-      } else {
-        numbersArray.push(selectedNumber);
-        currentNumber = numbersArray.join("");
-        setOutput(currentNumber);
-      }
-    }),
-  );
-}
-getNumbers();
+window.addEventListener("keydown", function (e) {
+  let selectedKey = e.key;
+  if (!isNaN(selectedKey)) {
+    getNumbers(selectedKey);
+    console.log(`It's a number!`);
+  } else if (selectedKey === "Backspace") {
+    backspace();
+  } else if (selectedKey === ".") {
+    getNumbers(selectedKey);
+    dotButton.disabled = true;
+  }
+  console.log(selectedKey, typeof selectedKey);
+});
 
-const backspace = document.querySelector("#backspace");
-backspace.addEventListener("click", function () {
+const numberButtons = document.querySelectorAll(".numbers button");
+numberButtons.forEach((btn) =>
+  btn.addEventListener("click", function (e) {
+    let selectedNumber = e.target.textContent;
+    getNumbers(selectedNumber);
+  }),
+);
+
+function getNumbers(input) {
+  if (numbersArray.length === 0 && input === ".") {
+    numbersArray.push(0);
+    numbersArray.push(input);
+    currentNumber = numbersArray.join("");
+    setOutput(currentNumber);
+  } else {
+    numbersArray.push(input);
+    currentNumber = numbersArray.join("");
+    setOutput(currentNumber);
+  }
+}
+
+const backspaceButton = document.querySelector("#backspace");
+backspaceButton.addEventListener("click", function () {
+  backspace();
+});
+
+function backspace() {
   if (numbersArray.length > 1) {
     numbersArray.pop();
     currentNumber = numbersArray.join("");
@@ -44,7 +63,7 @@ backspace.addEventListener("click", function () {
     currentNumber = 0;
     setOutput(currentNumber);
   }
-});
+}
 
 const dotButton = document.querySelector("#dot");
 dotButton.addEventListener("click", function (e) {
