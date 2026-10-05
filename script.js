@@ -5,6 +5,7 @@ let firstNumber = "";
 let secondNumber = "";
 let result = "";
 let enterPressed = false;
+let dotPressed = false;
 
 function setOutput(value) {
   let output = document.querySelector(".output");
@@ -15,9 +16,8 @@ let numbersArray = [];
 
 window.addEventListener("keydown", function (e) {
   let selectedKey = e.key;
-  if (!isNaN(selectedKey)) {
+  if (!isNaN(selectedKey) && selectedKey !== " ") {
     getNumbers(selectedKey);
-    console.log(`It's a number!`);
   }
   switch (selectedKey) {
     case "+":
@@ -37,7 +37,10 @@ window.addEventListener("keydown", function (e) {
       getOperator(selectedKey);
       break;
     case ".":
-      getNumbers(selectedKey);
+      if (!dotPressed) {
+        getNumbers(selectedKey);
+      }
+      dotPressed = true;
       dotButton.disabled = true;
       break;
     case "Backspace":
@@ -50,7 +53,6 @@ window.addEventListener("keydown", function (e) {
       clear();
       break;
   }
-  console.log(selectedKey, typeof selectedKey);
 });
 
 const numberButtons = document.querySelectorAll(".numbers button");
@@ -93,6 +95,7 @@ function backspace() {
 
 const dotButton = document.querySelector("#dot");
 dotButton.addEventListener("click", function (e) {
+  dotPressed = true;
   dotButton.disabled = true;
 });
 
@@ -107,6 +110,7 @@ operatorButtons.forEach((btn) =>
 );
 
 function getOperator(input) {
+  dotPressed = false;
   dotButton.disabled = false;
   if (currentOperator) {
     prevOperator = currentOperator;
@@ -175,7 +179,7 @@ function clear() {
 }
 
 function roundFloat(value) {
-  rounded = value.toFixed(8);
+  rounded = value.toFixed(6);
   let roundedAsArray = Array.from(rounded);
   let lastElement = roundedAsArray[roundedAsArray.length - 1];
   while (lastElement === "0" || lastElement === ".") {
