@@ -13,7 +13,7 @@ body {
   align-items: flex-start;
   height: 100dvh;
   width: 100dvw;
-  background-color: #ebebeb;
+  background-color: #7a7a7a;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 }
@@ -22,13 +22,11 @@ main {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background-color: #fafafa;
+  background-color: #e0e0e0;
   padding: 16px;
   border-radius: 16px;
   margin-top: 25dvh;
-  box-shadow:
-    0 0 8px 4px rgba(0, 0, 0, 0.2),
-    -2px -2px 0px #fff;
+  box-shadow: inset 4px 4px 2px #FFF, inset -4px -4px 2px #666, 4px 4px 2px #444, 0 0 8px 4px rgba(0, 0, 0, 0.4);
 }
 
 .d-flex {
@@ -57,6 +55,7 @@ main {
   background-color: #333;
   padding: 8px 16px;
   border-radius: 4px;
+  box-shadow: 2px 2px #fff;
 }
 
 .output {
@@ -77,6 +76,7 @@ button {
   font-size: 1.5rem;
   border-width: 8px;
   border-radius: 12px;
+  box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.4);
 }
 
 .numbers {
@@ -86,10 +86,11 @@ button {
 }
 
 .numbers button {
-  background-color: #fafafa;
+  background-color: #e0e0e0;
   color: #cc1f1f;
   font-weight: bold;
-  border-color: #eee;
+  border-color: #e0e0e0;
+  box-shadow: -1px -1px rgba(0,0,0,0.2);
 }
 
 .numbers button:disabled {
